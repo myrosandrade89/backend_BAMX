@@ -16,7 +16,7 @@ class Comunidad(models.Model):
             self.num_estacion = 0
         if self.num_estacion == 0:
             self.descripcion = ''
-        if self.num_estacion == 1 and self.descripcion == '':
+        if self.num_estacion > 0 and self.descripcion == '':
             raise ValueError('La comunidad debe tener una descipción')
         super().save(*args, **kwargs)
 
