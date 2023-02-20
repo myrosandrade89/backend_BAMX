@@ -21,5 +21,5 @@ class Comunidad(models.Model):
         super().save(*args, **kwargs)
 
     class Meta:
-        verbose_name_plurar = 'Comunidades'
+        verbose_name_plural = 'Comunidades'
         ordering = ['fecha_modificacion']
