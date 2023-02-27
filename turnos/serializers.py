@@ -1,7 +1,12 @@
 from rest_framework import serializers
 from turnos.models import Turno
 
-class TurnoSerializer(serializers.HyperlinkedModelSerializer):
+class TurnoSerializer(serializers.ModelSerializer):
     class Meta:
         model = Turno
-        fields = ['url', 'id', 'numero', 'comunidad', 'caja', 'en_atencion']
+        fields = ['id', 'numero', 'comunidad', 'caja', 'en_atencion']
+
+class CambioTurnoSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Turno
+        fields = ['id', 'caja']
