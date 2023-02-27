@@ -18,11 +18,11 @@ class ComunidadViewSet(viewsets.ModelViewSet):
     @action(detail=True, methods=['patch'])
     def increment_estacion(self, request, pk=None):
         comunidad = self.get_object()
-        serializer = ComunidadSerializer(data=request.data)
-        if serializer.is_valid():
-            comunidad.descripcion = serializer.validated_data['descripcion']
-            comunidad.estacion += 1
+        try:
+            if 'descripcion' in request.data and comunidad.num_estacion == 0:
+                comunidad.descripcion = request.data['descripcion']
+            comunidad.num_estacion += 1
             comunidad.save()
             return Response({'status': 'estación actualizada'})
-        else:
-            return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+        except ValueError as e:
+            return Response(str(e), status=status.HTTP_400_BAD_REQUEST)
