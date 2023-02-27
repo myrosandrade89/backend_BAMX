@@ -12,16 +12,15 @@ class Migration(migrations.Migration):
 
     operations = [
         migrations.CreateModel(
-            name='Comunidad',
+            name='Caja',
             fields=[
                 ('id', models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
                 ('nombre', models.CharField(max_length=100)),
-                ('clave_sae', models.CharField(max_length=100)),
                 ('fecha_creacion', models.DateTimeField(auto_now_add=True)),
                 ('fecha_modificacion', models.DateTimeField(auto_now=True)),
             ],
             options={
-                'verbose_name_plural': 'Comunidades',
+                'verbose_name_plural': 'Cajas',
                 'ordering': ['nombre'],
             },
         ),

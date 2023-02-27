@@ -1,13 +1,13 @@
 from django.db import models
-from comunidades import Comunidad
-from cajas import Caja
+from comunidades.models import Comunidad
+from cajas.models import Caja
 
 
 # Create your models here.
 class Turno(models.Model):
     numero = models.IntegerField()
-    comunidad = models.ForeignKey(Comunidad, on_delete=models.CASCADE, related_name='turnos', unique=True)
-    caja =  models.ForeignKey(Caja, on_delete=models.CASCADE, related_name='turnos', unique=True, null=True, blank=True)
+    comunidad = models.OneToOneField(Comunidad, on_delete=models.CASCADE, related_name='turno', unique=True)
+    caja =  models.OneToOneField(Caja, on_delete=models.CASCADE, related_name='turno', unique=True, null=True, blank=True)
     en_atencion = models.BooleanField(default=False)
     fecha_creacion = models.DateTimeField(auto_now_add=True)
     fecha_modificacion = models.DateTimeField(auto_now=True)
