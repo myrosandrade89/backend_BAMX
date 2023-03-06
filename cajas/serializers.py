@@ -1,7 +1,7 @@
 from rest_framework import serializers
 from cajas.models import Caja
 
-class CajaSerializer(serializers.HyperlinkedModelSerializer):
+class CajaSerializer(serializers.ModelSerializer):
     class Meta:
         model = Caja
-        fields = ['url', 'id', 'nombre']
+        fields = [ 'id', 'nombre', 'user']

@@ -2,9 +2,10 @@ from rest_framework import serializers
 from django.contrib.auth.models import User
 
 class UserSerializer(serializers.ModelSerializer):
+    caja = serializers.ReadOnlyField(source='caja.nombre')
     class Meta:
         model = User
-        fields = ['id', 'username', 'password']
+        fields = ['id', 'username', 'password', 'caja']
         extra_kwargs = {'password': {'write_only': True}}
 
     def create(self, validated_data):
