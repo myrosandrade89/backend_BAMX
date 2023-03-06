@@ -5,8 +5,3 @@ class TurnoSerializer(serializers.ModelSerializer):
     class Meta:
         model = Turno
         fields = ['id', 'numero', 'comunidad', 'caja', 'en_atencion']
-
-class CambioTurnoSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = Turno
-        fields = ['id', 'caja']

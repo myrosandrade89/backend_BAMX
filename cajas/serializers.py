@@ -5,3 +5,8 @@ class CajaSerializer(serializers.ModelSerializer):
     class Meta:
         model = Caja
         fields = [ 'id', 'nombre', 'user']
+
+class CajaIDSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Caja
+        fields = [ 'id']
