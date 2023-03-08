@@ -35,7 +35,7 @@ class CajaViewSet(viewsets.ModelViewSet):
             turno.caja = caja
             turno.en_atencion = True
             turno.save()
-            return Response({'status': f'turno {turno.pk} en atención'},status=status.HTTP_200_OK)
+            return Response({'status': f'turno {turno.numero} en atención'},status=status.HTTP_200_OK)
         except ValueError as e:
           return Response({'error': str(e)}, status=status.HTTP_400_BAD_REQUEST)
             
