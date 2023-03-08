@@ -6,7 +6,7 @@ from rest_framework import serializers
 
 # Create your models here.
 class Turno(models.Model):
-    numero = models.IntegerField()
+    numero = models.IntegerField(unique=True)
     comunidad = models.OneToOneField(Comunidad, on_delete=models.CASCADE, related_name='turno', unique=True)
     caja =  models.OneToOneField(Caja, on_delete=models.CASCADE, related_name='turno', unique=True, null=True, blank=True)
     en_atencion = models.BooleanField(default=False)
