@@ -42,6 +42,7 @@ INSTALLED_APPS = [
     'turnos',
     'cajas',
     'users',
+    'link',
 ]
 
 MIDDLEWARE = [
