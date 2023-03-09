@@ -1,4 +1,5 @@
 from django.urls import path, include
+from rest_framework.authtoken.views import obtain_auth_token
 from rest_framework.routers import DefaultRouter
 from comunidades.views import ComunidadViewSet
 from turnos.views import TurnoViewSet
@@ -21,4 +22,5 @@ urlpatterns = [
     path('', include(router.urls)),
     path('users/my', CurrentUserView.as_view()),
     path('api-auth/', include('rest_framework.urls')),
+    path('api-token-auth/', obtain_auth_token, name='api_token_auth'),
 ]
