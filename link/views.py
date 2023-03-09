@@ -9,6 +9,6 @@ class LinkViewSet(viewsets.ModelViewSet):
     """
     API endpoint that allows comunidades to be viewed or edited
     """
-    queryset = Link.objects.all().order_by('liga')
+    queryset = Link.objects.all().order_by('-fecha_creacion')
     serializer_class = LinkSerializer
     permission_classes = [permissions.IsAuthenticated]
