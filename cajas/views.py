@@ -3,7 +3,6 @@ from rest_framework.response import Response
 from rest_framework.decorators import action
 from cajas.models import Caja
 from cajas.serializers import CajaSerializer, CajaIDSerializer
-from rest_framework import viewsets, permissions
 from turnos.models import Turno
 
 
