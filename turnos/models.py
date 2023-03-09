@@ -4,7 +4,6 @@ from cajas.models import Caja
 from rest_framework import serializers
 
 
-# Create your models here.
 class Turno(models.Model):
     numero = models.IntegerField(unique=True)
     comunidad = models.OneToOneField(Comunidad, on_delete=models.CASCADE, related_name='turno', unique=True)
