@@ -4,6 +4,7 @@ from comunidades.views import ComunidadViewSet
 from turnos.views import TurnoViewSet
 from cajas.views import CajaViewSet
 from users.views import UserViewSet
+from users.views import CurrentUserView
 from link.views import LinkViewSet
 
 
@@ -18,6 +19,6 @@ router.register(r'link', LinkViewSet,basename="link")
 # The API URLs are now determined automatically by the router.
 urlpatterns = [
     path('', include(router.urls)),
+    path('users/my', CurrentUserView.as_view()),
     path('api-auth/', include('rest_framework.urls')),
-
 ]
