@@ -1,9 +1,8 @@
-from rest_framework import viewsets, permissions
+from rest_framework import viewsets, permissions, status
 from turnos.models import Turno
 from turnos.serializers import TurnoSerializer
-
+from rest_framework.response import Response
 from link.models import Link
-
 from oauth2client.service_account import ServiceAccountCredentials
 import gspread
 from datetime import datetime
@@ -26,14 +25,11 @@ def write_google_sheets(id_comunidad, comunidad, turno):
     try:
         sheet = client.open_by_url(link)
     except UnboundLocalError:
-        print('URL not accesible')
-        raise SystemExit
+        return Response({'detail': 'URL not accesible'}, status=status.HTTP_400_BAD_REQUEST)
     except gspread.exceptions.APIError:
-        print('URL not accesible')
-        raise SystemExit
+        return Response({'detail': 'URL not accesible'}, status=status.HTTP_400_BAD_REQUEST)
     except Exception as e:
-        print(e)
-        raise SystemExit
+        return Response({'detail': f'{e}'}, status=status.HTTP_400_BAD_REQUEST)
 
     worksheet = sheet.get_worksheet(0)
 
@@ -50,11 +46,10 @@ def write_google_sheets(id_comunidad, comunidad, turno):
         turno_column = turno_cell.col
         
     except AttributeError:
-        print('Error: A column was not found')
-        raise SystemExit
+        return Response({'detail': 'Error: A column was not found'}, status=status.HTTP_400_BAD_REQUEST)
     except Exception as e:
-        print(e)
-        raise SystemExit
+        return Response({'detail': f'{e}'}, status=status.HTTP_400_BAD_REQUEST)
+
 
     write_row = header_row + turno
     above_row = write_row - 1 
@@ -62,18 +57,15 @@ def write_google_sheets(id_comunidad, comunidad, turno):
 
     # Checking the above row is filled
     if None in (worksheet.cell(above_row, id_comunidad_column).value, worksheet.cell(above_row, comunidad_column).value, worksheet.cell(above_row, hora_llegada_column).value, worksheet.cell(above_row, turno_column).value):
-        print(f'Please fill the row {above_row} of the file and try again')
-        raise SystemExit
+        return Response({'detail': f'Please fill the row {above_row} of the file and try again'}, status=status.HTTP_400_BAD_REQUEST)
     
     # Checking the actual row is not filled
     if (worksheet.cell(write_row, id_comunidad_column).value is not None or worksheet.cell(write_row, comunidad_column).value is not None or  worksheet.cell(write_row, hora_llegada_column).value is not None or worksheet.cell(write_row, turno_column).value is not None):
-        print(f'The row {write_row} is already filled')
-        raise SystemExit
+        return Response({'detail': f'The row {write_row} is already filled'}, status=status.HTTP_400_BAD_REQUEST)
 
     # Checking the following row is empty 
     if (worksheet.cell(below_row, id_comunidad_column).value is not None or worksheet.cell(below_row, comunidad_column).value is not None or worksheet.cell(below_row, hora_llegada_column).value is not None or worksheet.cell(below_row, turno_column).value is not None):
-        print(f'The row {below_row} is already filled and it should not')
-        raise SystemExit
+        return Response({'detail': f'The row {below_row} is already filled and it should not'}, status=status.HTTP_400_BAD_REQUEST)
         
 
     
