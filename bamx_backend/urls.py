@@ -21,6 +21,5 @@ router.register(r'link', LinkViewSet,basename="link")
 urlpatterns = [
     path('', include(router.urls)),
     path('users/my', CurrentUserView.as_view()),
-    path('api-auth/', include('rest_framework.urls')),
     path('api-token-auth/', obtain_auth_token, name='api_token_auth'),
 ]
