@@ -7,14 +7,16 @@ from oauth2client.service_account import ServiceAccountCredentials
 import gspread
 from datetime import datetime
 from pytz import timezone
-
+import json
 
 def write_google_sheets(id_comunidad, comunidad, turno):
     # define the scope
     scope = ['https://www.googleapis.com/auth/spreadsheets']
 
     # add credentials to the account
-    creds = ServiceAccountCredentials.from_json_keyfile_name('.\\secret_key.json', scope)
+    creds = ServiceAccountCredentials.from_json_keyfile_dict(json.loads("""
+    
+    """), scope)
 
     # authorize the clientsheet 
     client = gspread.authorize(creds)
