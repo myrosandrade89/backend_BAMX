@@ -39,7 +39,7 @@ def write_google_sheets(id_comunidad, comunidad, turno):
     turno_cell = worksheet.find('TURNO')
 
     try:
-        header_row = id_comunidad_cell.row
+        header_row = Link.objects.all().order_by('-fecha_creacion')[0].fila_inicial
         id_comunidad_column = id_comunidad_cell.col
         comunidad_column = comunidad_cell.col
         hora_llegada_column = hora_llegada_cell.col
