@@ -7,6 +7,7 @@ from rest_framework import serializers
 class Turno(models.Model):
     numero = models.IntegerField(unique=True)
     comunidad = models.OneToOneField(Comunidad, on_delete=models.CASCADE, related_name='turno', unique=True)
+    nombre_comunidad = models.CharField(max_length=100, blank=True, null=True)
     caja =  models.OneToOneField(Caja, on_delete=models.CASCADE, related_name='turno', unique=True, null=True, blank=True)
     en_atencion = models.BooleanField(default=False)
     fecha_creacion = models.DateTimeField(auto_now_add=True)
