@@ -18,6 +18,7 @@ class Turno(models.Model):
             raise serializers.ValidationError({'turno': 'No se puede guardar un turno en atención sin caja'})
         if not self.en_atencion and (self.caja != None and self.caja != ''):
             raise serializers.ValidationError({'turno': 'No se puede guardar un turno no en atención con caja'})
+        self.nombre_comunidad = self.comunidad.nombre
         super().save(*args, **kwargs)
 
     class Meta:
